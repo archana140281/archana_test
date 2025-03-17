@@ -1,0 +1,30 @@
+name: Run API Tests
+
+on:
+  push:
+    branches:
+      - 'feature/archana-CBATest' # Trigger only on push to this branch
+  pull_request:
+    branches:
+      - 'feature/archana-CBATest' # Trigger only on PR to this branch
+
+jobs:
+  test:
+    runs-on: ubuntu-latest # Use the latest Ubuntu environment for the runner
+
+    steps:
+      - name: Checkout the code
+        uses: actions/checkout@v2 # Checkout the repository code
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16' # Set up Node.js version 16 (or any version you prefer)
+
+      - name: Install dependencies
+        run: |
+          npm install  # Install the project dependencies
+
+      - name: Run tests
+        run: |
+          npx jest  # Run the tests using Jest
